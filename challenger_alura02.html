@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+	
+	<head>
+	
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+		<title>Codificador e Decodificador</title>
+
+ 		<link rel="stylesheet" href="reset.css">
+		<link rel="stylesheet" href="style.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+
+	</head>
+	
+	<body class="body">
+		
+		<main>
+
+			<header id="cabecalho">
+
+				<h1 class="titulo">Codificador e Decodificador</h1>
+			    <img src="Vector.png" alt="Logo da Alura">
+			        
+		    </header>
+
+		    <div id="area_texto">
+    	    	
+		    	<textarea id="texto-saida"><span></span></textarea>
+
+		    </div>
+
+		    <div id="info">
+
+		        <img src="atento.png" alt="Signo de exclamação" id="exclamacao">
+                <p id="aviso">Apenas letras minúsculas e sem acento</p>	
+           	
+           	</div>
+        	
+       		<div class="retangulo">
+
+				<button type="button" onclick="copiar()" id="copiar"> Copiar </button>
+				
+				<textarea id ="transcripcao"></textarea>
+
+			</div>
+
+			<div id="botoes">
+		
+				<button type="button" onclick="criptografar()" id="criptografar"> Criptografar </button>
+				<button type="button" onclick="descriptografar()" id="descriptografar"> Descriptografar </button>
+				
+			</div>
+
+			<footer class="rodape">
+				
+				<p id="desenvolvido"> Desenvolvido por Julio Castiglioni </p>
+				<img src="mail.png" alt="Endereço de mail" id="mail">
+				<p id="email"> paranodesaparecer@hotmail.com </p>
+				<img src="linkedin.png" alt="Logo de Linkedin" id="linkedin">
+				<p id="profissional"> www.linkedin.com/in/julio-cesar-noya-castiglioni-gestão </p>
+
+			</footer>
+
+		</main>
+
+		<script >
+			
+			let entrada = document.querySelector("#texto-saida");
+			
+			if(localStorage.getItem("resultado") != ""){
+				
+				let Resultado = localStorage.getItem("resultado");
+				
+				document.getElementById("texto-saida").textContent = Resultado;
+				document.getElementById("transcripcao").textContent = Resultado;
+				
+			}
+			
+			if(entrada.value != ""){
+				
+				localStorage.clear();
+	
+				document.getElementById("texto-saida").focus();
+		
+			}
+
+			if(entrada.value == null){
+
+				localStorage.clear();
+	
+				document.getElementById("texto-saida").focus();
+				
+			}
+
+			entrada = document.querySelector("#texto-saida");
+			
+			function criptografar(){
+
+				let texto = entrada.value;
+				
+				valida_entrada(texto);
+
+		  		let Criptografia = texto.replace(/e/g, "enter").replace(/i/g, "imes").replace(/a/g, "ai").replace(/o/g, "ober").replace(/u/g, "ufat");
+		  		
+		  		entrada.value = Criptografia;	
+				document.getElementById("texto-saida").textContent = Criptografia;
+				document.getElementById("transcripcao").textContent = Criptografia;
+		
+			}
+
+			function descriptografar(){
+
+				let texto = entrada.value;
+
+				valida_entrada(texto);
+
+		  		let Descriptografia = texto.replace(/enter/g, "e").replace(/imes/g, "i").replace(/ai/g, "a").replace(/ober/g, "o").replace(/ufat/g, "u");
+				
+				entrada.value = Descriptografia;
+				document.getElementById("texto-saida").textContent = Descriptografia;
+				document.getElementById("transcripcao").textContent = Descriptografia;
+	
+			}
+
+			function copiar() {
+		    
+		    	entrada = document.getElementById("texto-saida");
+		    	entrada.select();
+		  		entrada.setSelectionRange(0, 99999);
+		    	document.execCommand('copy');
+		    	alert("Texto copiado.");
+		    	entrada.select();
+				
+		    }
+
+			function valida_entrada(texto){
+
+				for(let cont = 0; cont<texto.length; cont++){
+	  		
+				  	if (texto[cont].charCodeAt() < 97 || texto[cont].charCodeAt() > 122 ){
+	  					
+	  					if(texto[cont].charCodeAt() != 32){
+	  			
+						alert("Apenas letras minúsculas e sem acento");
+		    			e.preventDefault();			    
+
+		    			}
+
+					}
+
+				}		
+					
+			  	if (texto === "") {
+
+				    alert("Apenas letras minúsculas e sem acento");
+				    e.preventDefault();
+	    	  
+			  	}
+
+			}
+
+		</script>
+
+	</body>
+
+</html>
+

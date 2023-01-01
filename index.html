@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br" id="html">
+	
+	<head>
+	
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+ 		
+ 		<title>Codificador e Decodificador</title>
+		
+		<link rel="stylesheet" href="reset.css">
+		<link rel="stylesheet" href="style.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+		
+	</head>
+	
+	<body id="body">
+		
+
+		<main>
+
+			<header class="cabecalho">
+
+				<h1 class="titulo">Codificador e Decodificador</h1>
+		        <img src="Vector.png" alt="Logo da Alura">
+		        
+		    </header>
+
+		    <div id="texto_ent">
+
+		    	<textarea class="input" placeholder="Digite seu texto" required autofocus></textarea>
+
+		    </div>
+
+		    <div class="info">
+
+		        <img src="atento.png" id="img" alt="Signo de exclamação" id="exclamação">
+                <p id="aviso">Apenas letras minúsculas e sem acento</p>	
+           	
+           	</div>
+        	
+       		<div id="retangulo">
+
+       			<img src="buscador.png" alt="Menino procurando com lupa">
+				
+       			<div class="resultado">
+
+   					<p id="mensagem1">Nenhuma mensagem encontrada</p>
+					<p id="mensagem2">Digite um texto que você deseja criptografar ou descriptografar</p>
+					
+				</div>
+
+			</div>
+
+			<div class="botoes">
+		
+				<button type="button" onclick="criptografar()" id="criptografar"> Criptografar </button>
+				<button type="button" onclick="descriptografar()" id="descriptografar"> Descriptografar </button>
+		
+			</div>
+			
+			<footer id="rodape">
+				
+				<p id="desenvolvido"> Desenvolvido por Julio Castiglioni </p>
+				<img src="mail.png" alt="Endereço de mail" id="mail">
+				<p id="email"> paranodesaparecer@hotmail.com </p>
+				<img src="linkedin.png" alt="Logo de Linkedin" id="linkedin">
+				<p id="profissional"> www.linkedin.com/in/julio-cesar-noya-castiglioni-gestão </p>
+
+			</footer>
+
+		</main>
+
+		<script >
+			
+			let entrada = document.querySelector(".input");
+			let largura_tela = window.innerWidth;
+			
+			function criptografar(){
+
+				let texto = entrada.value;
+
+				valida_entrada(texto);
+			
+		  		let Criptografia = texto.replace(/e/g, "enter").replace(/i/g, "imes").replace(/a/g, "ai").replace(/o/g, "ober").replace(/u/g, "ufat");
+	
+				if (largura_tela <= 420){
+
+			  		localStorage.setItem("resultado",Criptografia);
+			  		window.location.href = "challenger_alura02.html";
+			  		
+				}
+
+				if (largura_tela> 420 && largura_tela < 1200){
+
+					if(	document.querySelector(".input") == null){
+						
+						document.getElementById("texto-saida").textContent = Criptografia;
+						document.getElementById("input").textContent = Criptografia;
+						entrada.value = Criptografia;
+
+					}else{		
+
+						modifica_tela(Criptografia);
+						entrada.value = Criptografia;
+
+					}		
+					
+				}
+
+				if (largura_tela > 1200){
+
+					if(	document.querySelector(".input") == null){
+						
+						document.getElementById("texto-saida").textContent = Criptografia;
+						document.getElementById("input").textContent = Criptografia;
+						entrada.value = Criptografia;
+
+					}else{			
+						
+						modifica_desktop(Criptografia);
+						entrada.value = Criptografia;
+
+					}		
+			
+				}
+			
+			}
+
+			function descriptografar(){
+
+				let texto = entrada.value;
+
+				valida_entrada(texto);
+
+		  		let Descriptografia = texto.replace(/enter/g, "e").replace(/imes/g, "i").replace(/ai/g, "a").replace(/ober/g, "o").replace(/ufat/g, "u");
+								
+				if (largura_tela <= 420){
+
+				  	localStorage.setItem("resultado",Descriptografia);
+		  			window.location.href = "challenger_alura02.html";
+		
+				}
+
+				if (largura_tela> 420 && largura_tela < 1200){
+
+					if(	document.querySelector(".input") == null){
+				
+						document.getElementById("texto-saida").textContent = Descriptografia;
+						document.getElementById("input").textContent = Descriptografia;
+						entrada.value = Descriptografia;
+
+					}else{	
+
+						modifica_tela(Descriptografia);
+						entrada.value = Descriptografia;
+					
+					}
+
+				}
+							
+				if (largura_tela > 1200){
+										
+					if(	document.querySelector(".input") == null){
+					
+						document.getElementById("texto-saida").textContent = Descriptografia;
+						document.getElementById("input").textContent = Descriptografia;
+						entrada.value = Descriptografia;
+
+					}else{			
+					
+						modifica_desktop(Descriptografia);
+						entrada.value = Descriptografia;
+
+					}		
+				
+				}
+
+			}
+
+			function copiar() {
+		    
+		    	entrada = document.getElementById("input");
+		    	entrada.select();
+		  		entrada.setSelectionRange(0, 99999);
+		    	document.execCommand('copy');
+		    	alert("Texto copiado.");
+		    	entrada.select();
+			
+			}
+	
+			function valida_entrada(texto){
+
+			  	for(let cont = 0; cont<texto.length; cont++){
+	  		
+				  	if (texto[cont].charCodeAt() < 97 || texto[cont].charCodeAt() > 122 ){
+	  					
+	  					if(texto[cont].charCodeAt() != 32){
+	  			
+						alert("Apenas letras minúsculas e sem acento");
+		    			e.preventDefault();			    
+
+		    			}
+
+					}
+
+				}		
+				
+				if (texto === "") {
+
+				    alert("Apenas letras minúsculas e sem acento");
+				    e.preventDefault();
+	    	  
+			  	}
+
+			}
+
+			function modifica_tela(valor){
+
+				let body = document.getElementById("body");
+				body.style.height = "1384px";
+				let rodape = document.getElementById("rodape")
+				rodape.style.top = "1355px"
+				let texto= document.getElementById("body");
+				let tag1 = document.createElement('div');
+				texto.appendChild(tag1).id = "altera_retangulo";
+				let saida = document.getElementById("altera_retangulo");
+				let tag2 = document.createElement('textarea');
+				saida.appendChild(tag2).id = "texto-saida";
+				document.getElementById("texto-saida").textContent = valor;
+				let input = document.getElementById("texto_ent");
+				let tag3 = document.createElement('textarea');
+				input.appendChild(tag3).id = "input";
+				document.getElementById("input").textContent = valor;
+				document.getElementById("input").focus();
+				let b_copy = document.getElementById("altera_retangulo");
+				let tag4 = document.createElement('button');
+				b_copy.appendChild(tag4).id = "copiar";
+				let btn_copy = document.querySelector("#copiar");
+				btn_copy.textContent = "Copiar";
+				btn_copy.type = "button";
+				document.getElementById("copiar").addEventListener("click", copiar);
+				let clase_input = document.querySelector(".input");
+				clase_input.parentNode.removeChild(clase_input);
+
+			}
+
+			function modifica_desktop(valor){
+
+				
+				document.getElementById("img").style.display = "none";
+				let saida = document.getElementById("retangulo");
+				let tag = document.createElement('textarea');
+				saida.appendChild(tag).id = "texto-saida";
+				document.getElementById("texto-saida").textContent = valor;
+				let tag1 = document.createElement('button');
+				saida.appendChild(tag1).id = "copiar";
+				let btn_copy = document.querySelector("#copiar");
+				btn_copy.textContent = "Copiar";
+				btn_copy.type = "button";
+				document.getElementById("copiar").addEventListener("click", copiar);
+				let input = document.getElementById("texto_ent");
+				let tag2 = document.createElement('textarea');
+				input.appendChild(tag2).id = "input";
+				document.getElementById("input").textContent = valor;
+				document.getElementById("input").focus();
+				let clase_resultado = document.querySelector(".resultado");
+				clase_resultado.parentNode.removeChild(clase_resultado);
+				let clase_input = document.querySelector(".input");
+				clase_input.parentNode.removeChild(clase_input);
+
+			}
+
+		</script>
+
+	</body>
+
+</html>
+
+
+
+			
